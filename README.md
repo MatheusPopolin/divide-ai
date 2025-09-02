@@ -12,7 +12,7 @@ O usuário poderá cadastrar participantes, lançar despesas indicando quem pago
 ---
 
 ## 🎨 Prototipação no Figma
-[Link para o projeto no Figma](#) *(a ser adicionado)*  
+[Figma](https://www.figma.com/design/OKYROVPyDKFA8HdsYDoStN/Divide-A%C3%AD?t=A6lNWIiGrLsfbSCH-1) *(em andamento)*  
 
 ---
 
