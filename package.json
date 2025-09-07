@@ -1,0 +1,26 @@
+{
+  "name": "divide-ai",
+  "version": "1.0.0",
+  "description": "O DivideAí é uma aplicação web para ajudar pessoas a dividirem despesas de forma justa.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusPopolin/divide-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusPopolin/divide-ai/issues"
+  },
+  "homepage": "https://github.com/MatheusPopolin/divide-ai#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
