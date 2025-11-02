@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DivideAí</title>
+    <title>DivideAí - Cadastro</title>
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
@@ -12,7 +12,7 @@
     >
     <link rel="stylesheet" href="/assets/css/style.css">
   </head>
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
@@ -29,13 +29,30 @@
                 <a class="nav-link" href="/pages/divisao_robusta.html">Divisão robusta</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/pages/minhas_divisoes.html">Minhas divisões</a>
+                <a class="nav-link" href="/pages/minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+
+    <section class="divideai-section">
+      <form class="d-flex flex-column gap-3 py-5 px-3 divideai-section-form">
+        <h1 class="text-center fw-semibold fs-5">Cadastro</h1>
+        <div>
+          <label for="email" class="form-label">Email</label>
+          <input required type="email" class="form-control" id="email" placeholder="Digite o email">
+        </div>
+        <div>
+          <label for="email" class="form-label">Senha</label>
+          <input required type="password" class="form-control" id="password" placeholder="Digite a senha">
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <p class="text-center">Já possui conta? <a href="/index.html" class="text-primary">Fazer login</a></p>
+      </form>
+    </section>
+
 
     <script 
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
