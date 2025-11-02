@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DivideAí</title>
+    <title>DivideAí - Divisão Robusta</title>
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
@@ -12,7 +12,7 @@
     >
     <link rel="stylesheet" href="/assets/css/style.css">
   </head>
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
@@ -36,6 +36,30 @@
         </div>
       </nav>
     </header>
+
+    <main class="w-100 h-100 overflow-y-auto">
+      <form 
+        class="d-flex flex-column gap-3 p-3 main-container mx-auto"
+        action="/pages/divisao_robusta_despesas.html"
+        method="GET"
+      >
+        <h1 class="fw-semibold fs-5 text-center">Divisão Robusta</h1>
+        <div>
+          <label for="title" class="form-label">Nome da divisão</label>
+          <input required type="text" class="form-control" id="title" placeholder="Digite o nome da divisão">
+        </div>
+        <div>
+          <label for="description" class="form-label">Descrição</label>
+          <input required type="text" class="form-control" id="description" placeholder="Digite a descrição">
+        </div>
+        <div>
+          <label for="date" class="form-label">Data</label>
+          <input required type="date" class="form-control" id="date" placeholder="Digite a data">
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Cadastrar despesa</button>
+      </form>
+    </main>
 
     <script 
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
