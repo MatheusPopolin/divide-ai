@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DivideAí</title>
+    <title>DivideAí - Divisão Simples - Resultado</title>
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
@@ -12,7 +12,7 @@
     >
     <link rel="stylesheet" href="/assets/css/style.css">
   </head>
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
@@ -36,6 +36,35 @@
         </div>
       </nav>
     </header>
+
+    <main class="w-100 h-100 overflow-y-auto">
+      <section class="d-flex flex-column gap-3 p-3 main-container mx-auto">
+        <h1 class="fw-semibold fs-5 text-center">Divisão Simples - Resultado</h1>
+        <p class="result rounded-2 p-3 text-center">Valor por participante: R$ 25,00</p>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Churrasco</h5>
+            <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
+            <p class="card-text-item m-0">Data: <span>20/10/2025</span></p>
+            <p class="card-text-item m-0">Pago por: <span>Maria</span></p>
+            <p class="card-text">Participanes:</p>
+            <ul class="card-list">
+              <li>Maria</li>
+              <li>André</li>
+              <li>Caio</li>
+              <li>Paulo</li>
+              <li>Júnior</li>
+              <li>Ana</li>
+              <li>Matheus</li>
+              <li>Luiz</li>
+              <li>Silvia</li>
+              <li>Pedro</li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn btn-primary">Compartilhar</button>
+      </section>
+    </main>
 
     <script 
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
