@@ -1,0 +1,13 @@
+:root {
+    --bs-primary: #79DFC1;    
+    --bs-primary-rgb: 121, 223, 193;
+    --bs-body-font-family: "Poppins", sans-serif;
+}
+
+.nav-link {
+  color: var(--bs-white) !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
