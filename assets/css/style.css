@@ -35,3 +35,20 @@
         border-color: var(--bs-gray-300);
     }
 }
+
+.card-link {
+    text-decoration: none;
+}
+
+.card-list {
+    color: var(--bs-gray-600);
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        width: 860px
+    }
+}
+
+
+
