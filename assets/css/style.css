@@ -80,3 +80,9 @@
     background-color: var(--bs-primary-disabled);
     border: 1px solid var(--bs-primary);
 }
+
+.card-split {
+    width: 266px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
