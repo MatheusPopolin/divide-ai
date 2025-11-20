@@ -4,7 +4,9 @@
   "description": "O DivideAí é uma aplicação web para ajudar pessoas a dividirem despesas de forma justa.",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,12 @@
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^9.39.1",
+    "@eslint/json": "^0.14.0",
+    "@eslint/markdown": "^7.5.1",
+    "eslint": "^9.39.1",
+    "gh-pages": "^6.3.0",
+    "globals": "^16.5.0"
   }
 }
