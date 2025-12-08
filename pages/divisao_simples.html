@@ -33,10 +33,10 @@
               <li class="nav-item">
                 <a class="nav-link active" href="./divisao_simples.html">Divisão simples</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="./divisao_robusta.html">Divisão robusta</a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <li class="nav-item d-none">
                 <a class="nav-link" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
@@ -47,51 +47,99 @@
 
     <main class="w-100 h-100 overflow-y-auto">
       <form
-        class="d-flex flex-column gap-3 p-3 main-container mx-auto"
-        action="./divisao_simples_resultado.html"
-        method="GET"
+        class="d-flex flex-column gap-3 p-3 main-container mx-auto needs-validation"
+        id="formSimpleSplit"
+        novalidate
       >
         <h1 class="fw-semibold fs-5 text-center">Divisão Simples</h1>
         <div>
-          <label for="value" class="form-label">Valor gasto</label>
-          <input required type="number" class="form-control" id="value" placeholder="Digite o valor gasto em R$" />
+          <label for="value" class="form-label">Valor gasto*</label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="value"
+            placeholder="Digite o valor gasto em R$"
+            maxlength="14"
+          />
+          <div class="invalid-feedback">Valor inválido.</div>
         </div>
         <div>
-          <label for="debtors" class="form-label">Número de pessoas</label>
-          <input required type="number" class="form-control" id="debtors" placeholder="Digite o número de pessoas" />
+          <label for="debtors" class="form-label">Número de pessoas*</label>
+          <input
+            required
+            type="number"
+            class="form-control"
+            id="debtors"
+            placeholder="Digite o número de pessoas"
+            min="1"
+            max="100"
+          />
+          <div class="invalid-feedback">Número de pessoas deve ser entre 1 e 100.</div>
         </div>
 
         <h2 class="fw-semibold fs-6 mt-3">Informações adicionais</h2>
         <div>
           <label for="title" class="form-label">Nome da divisão</label>
-          <input type="text" class="form-control" id="title" placeholder="Digite o nome da divisão" />
+          <input type="text" class="form-control" id="title" placeholder="Digite o nome da divisão" maxlength="255" />
+          <div class="invalid-feedback">Nome da divisão deve ter no máximo 255 caracteres.</div>
         </div>
         <div>
           <label for="description" class="form-label">Descrição</label>
-          <input type="text" class="form-control" id="description" placeholder="Digite a descrição" />
+          <input type="text" class="form-control" id="description" placeholder="Digite a descrição" maxlength="255" />
+          <div class="invalid-feedback">Descrição deve ter no máximo 255 caracteres.</div>
         </div>
         <div>
           <label for="date" class="form-label">Data</label>
           <input type="date" class="form-control" id="date" placeholder="Digite a data" />
+          <div class="invalid-feedback">Data inválida.</div>
         </div>
         <div>
           <label for="payer" class="form-label">Pago por</label>
-          <input type="text" class="form-control" id="payer" placeholder="Digite quem pagou" />
+          <input type="text" class="form-control" id="payer" placeholder="Digite quem pagou" maxlength="255" />
+          <div class="invalid-feedback">O pagador não pode ter o mesmo nome de um participante.</div>
         </div>
         <div>
           <label for="participants" class="form-label">Participantes</label>
-          <select for="participants" class="form-select" aria-label="Seleção de participantes">
-            <option selected>Selecione os participantes</option>
-            <option value="1">João</option>
-            <option value="2">Maria</option>
-            <option value="3">Pedro</option>
-          </select>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="participants"
+              placeholder="Digite o nome do participante"
+              maxlength="255"
+            />
+            <button class="btn btn-secondary" type="button" id="addParticipant">Adicionar</button>
+          </div>
+          <ul id="participantsList" class="mt-2 list-group" style="max-height: 200px; overflow-y: auto"></ul>
         </div>
 
         <button type="submit" class="btn btn-primary">Divide Aí</button>
       </form>
     </main>
 
+    <div class="toast-container p-3 top-0 end-0">
+      <div id="toastSuccess" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Divisão criada com sucesso!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div id="toastError" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Erro ao criar divisão!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -103,4 +151,147 @@
       crossorigin="anonymous"
     ></script>
   </body>
+
+  <script>
+    const simpleSplitForm = () => {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        $(".d-none").removeClass("d-none");
+      }
+
+      $("#value").maskMoney({
+        prefix: "R$ ",
+        thousands: ".",
+        decimal: ",",
+        allowZero: true,
+      });
+
+      const toastSuccess = $("#toastSuccess")[0];
+      const bootstrapToastSuccess = bootstrap.Toast.getOrCreateInstance(toastSuccess);
+      const toastError = $("#toastError")[0];
+      const bootstrapToastError = bootstrap.Toast.getOrCreateInstance(toastError);
+
+      const participantsList = [];
+
+      const addParticipant = () => {
+        const name = $("#participants").val().trim();
+        const payer = $("#payer").val().trim();
+
+        if (name === "") return;
+
+        participantsList.push(name);
+        $("#participants").val("");
+        renderParticipantsList();
+      };
+
+      const removeParticipant = (index) => {
+        participantsList.splice(index, 1);
+        renderParticipantsList();
+      };
+
+      const editParticipant = (index) => {
+        const currentName = participantsList[index];
+        const newName = prompt("Editar nome do participante:", currentName);
+        const payer = $("#payer").val().trim();
+
+        if (newName !== null && newName.trim() !== "") {
+          const trimmedName = newName.trim();
+          participantsList[index] = trimmedName;
+          renderParticipantsList();
+        }
+      };
+
+      const renderParticipantsList = () => {
+        $("#participantsList").empty();
+
+        participantsList.forEach((participant, index) => {
+          const listItem = $(`
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>${participant}</span>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary me-1 edit-participant" type="button" data-index="${index}">
+                  Editar
+                </button>
+                <button class="btn btn-sm btn-outline-danger remove-participant" type="button" data-index="${index}">
+                  Remover
+                </button>
+              </div>
+            </li>
+          `);
+          $("#participantsList").append(listItem);
+        });
+      };
+
+      $("#addParticipant").on("click", addParticipant);
+      $("#participants").on("keypress", function (e) {
+        if (e.which === 13) {
+          e.preventDefault();
+          addParticipant();
+        }
+      });
+
+      $(document).on("click", ".remove-participant", function () {
+        const index = $(this).data("index");
+        removeParticipant(index);
+      });
+
+      $(document).on("click", ".edit-participant", function () {
+        const index = $(this).data("index");
+        editParticipant(index);
+      });
+
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        $("#formSimpleSplit").removeClass("was-validated");
+
+        let formIsValid = formSimpleSplit.checkValidity();
+        if (!formIsValid) {
+          $("#formSimpleSplit").addClass("was-validated");
+          return;
+        }
+
+        const formatedValue = $("#value").val().replace("R$ ", "").replace(".", "").replace(",", ".");
+        const value = Number(formatedValue);
+        const debtors = Number($("#debtors").val());
+        const title = $("#title").val();
+        const description = $("#description").val();
+        const date = $("#date").val();
+        const payer = $("#payer").val();
+        const participants = participantsList;
+
+        console.log(value, debtors, title, description, date, payer, participants);
+
+        const method = "POST";
+        const headers = { "Content-Type": "application/json" };
+        const body = JSON.stringify({ value, debtors, title, description, date, payer, participants });
+
+        if (!userId) {
+          bootstrapToastSuccess.show();
+          localStorage.setItem("simpleSplit", body);
+          $("#formSimpleSplit").removeClass("was-validated");
+          window.location.href = `./divisao_simples_resultado.html`;
+          return;
+        }
+
+        try {
+          const response = await fetch("http://localhost:3000/simple_splits", {
+            method,
+            headers,
+            body,
+          });
+          const data = await response.json();
+          bootstrapToastSuccess.show();
+          $("#formSimpleSplit").removeClass("was-validated");
+          window.location.href = `./divisao_simples_resultado.html?id=${data.id}`;
+        } catch (error) {
+          bootstrapToastError.show();
+          console.error(error);
+        }
+      };
+
+      $("#formSimpleSplit").on("submit", handleSubmit);
+    };
+
+    $(document).ready(simpleSplitForm);
+  </script>
 </html>
