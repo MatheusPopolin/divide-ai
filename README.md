@@ -97,8 +97,12 @@ O usuário poderá cadastrar participantes, lançar despesas indicando quem pago
 ---
 
 ## 🖼️ Telas da Aplicação
-
-_(Screenshots das telas desenvolvidas serão adicionados aqui)_
+<img width="3456" height="1796" alt="image" src="https://github.com/user-attachments/assets/fdaff186-1ea6-41e4-82de-f84cc17aa1b4" />
+<img width="3456" height="1794" alt="image" src="https://github.com/user-attachments/assets/71c1a246-f245-4768-bf83-12970469213e" />
+<img width="3456" height="1792" alt="image" src="https://github.com/user-attachments/assets/a62c47ad-d6e8-4b4d-b938-37ec313a0a82" />
+<img width="3454" height="1788" alt="image" src="https://github.com/user-attachments/assets/496fa4d9-129a-41b8-a423-6444aaffc11a" />
+<img width="1729" height="894" alt="image" src="https://github.com/user-attachments/assets/ea49368e-9db6-4504-aaef-1159c1b3a905" />
+<img width="3456" height="1788" alt="image" src="https://github.com/user-attachments/assets/efeb7b86-ba2c-4100-ac43-4ee21bb38658" />
 
 ---
 
@@ -116,8 +120,8 @@ A aplicação deve ser implementada contendo as funcionalidades referentes aos t
 - [x] ID 06 - Aplica um Design System consistente (cores, tipografia, padrões de componentes) em toda a aplicação.
 - [x] ID 07 - Utiliza pré-processadores CSS (Sass, SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código.
 - [x] ID 08 - Aplica tipografia responsiva (media queries mobile first) ou tipografia fluida (função clamp() + unidades relativas).
-- [] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas).
-- [] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary).
+- [ ] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas).
+- [ ] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary).
 
 ### RA2 - Realizar tratamento de formulários e aplicar validações customizadas no lado cliente
 
@@ -131,7 +135,7 @@ A aplicação deve ser implementada contendo as funcionalidades referentes aos t
 - [x] ID 15 - Configura ambiente com Node.js e NPM para gerenciamento de pacotes e dependências.
 - [x] ID 16 - Utiliza boas práticas de versionamento no Git/GitHub (branch main ou branches específicos, uso de .gitignore).
 - [x] ID 17 - Mantém um README.md padronizado, conforme template da disciplina, com checklist preenchido.
-- [] ID 18 - Organiza arquivos do projeto de forma modular, seguindo padrão de exemplo fornecido.
+- [ ] ID 18 - Organiza arquivos do projeto de forma modular, seguindo padrão de exemplo fornecido.
 - [x] ID 19 - Configura linters e formatadores (ESLint, Prettier) para manter qualidade e padronização do código.
 
 ### RA4 - Aplicar bibliotecas de funções e componentes em JavaScript para aprimorar a interatividade de páginas web
@@ -143,4 +147,4 @@ A aplicação deve ser implementada contendo as funcionalidades referentes aos t
 
 - [x] ID 22 - Realiza requisições assíncronas para uma API fake (ex.: JSON Server) para persistir dados de um formulário.
 - [x] ID 23 - Realiza requisições assíncronas para uma API fake para exibir dados na página.
-- [] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros.
+- [ ] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros.
