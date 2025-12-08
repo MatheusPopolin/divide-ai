@@ -33,10 +33,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="./divisao_simples.html">Divisão simples</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="./divisao_robusta.html">Divisão robusta</a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <li class="nav-item d-none">
                 <a class="nav-link" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
@@ -60,19 +60,22 @@
         </div>
       </a>
 
-      <a href="./divisao_robusta.html" class="card-link">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title fs-4 fw-semibold">Robusta (+1 despesa)</h5>
-            <ul class="card-list">
-              <li>Informe mais de uma despesa, informando quem pagou e quem participará da divisão.</li>
-              <li>Como resultado, tenha um resumo dos pagamentos que devem ser feitos</li>
-            </ul>
-          </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fs-4 fw-semibold">Robusta (+1 despesa) - Em breve</h5>
+          <ul class="card-list">
+            <li>Informe mais de uma despesa, informando quem pagou e quem participará da divisão.</li>
+            <li>Como resultado, tenha um resumo dos pagamentos que devem ser feitos</li>
+          </ul>
         </div>
-      </a>
+      </div>
     </main>
 
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -83,5 +86,13 @@
       integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
       crossorigin="anonymous"
     ></script>
+    <script>
+      $(document).ready(() => {
+        const userId = localStorage.getItem("userId");
+        if (userId) {
+            $(".d-none").removeClass("d-none");
+          }
+      });
+    </script>
   </body>
 </html>
