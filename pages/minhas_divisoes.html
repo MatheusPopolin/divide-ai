@@ -33,10 +33,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="./divisao_simples.html">Divisão simples</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="./divisao_robusta.html">Divisão robusta</a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <li class="nav-item d-none">
                 <a class="nav-link active" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
@@ -47,89 +47,35 @@
 
     <main class="d-flex flex-column gap-3 p-3 main-container mx-auto">
       <h1 class="fw-semibold fs-5">Minhas divisões</h1>
-      <input required type="search" class="form-control" id="search" placeholder="Pesquisar" />
-      <section class="row gap-3 justify-content-center">
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="./divisao_simples_resultado.html" class="card-link card-split">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Churrasco</h5>
-                  <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-                </div>
-                <div>24/08/2025</div>
-              </div>
-            </div>
-          </div>
-        </a>
+      <!-- <input required type="search" class="form-control" id="search" placeholder="Pesquisar" /> -->
+      <section class="row gap-3 justify-content-center" id="splitsContainer">
+        <div id="emptyState" class="text-center">
+          <p class="text-muted mb-3">Você ainda não possui divisões cadastradas.</p>
+          <a href="./divisao_simples.html" class="btn btn-primary">Criar primeira divisão</a>
+        </div>
       </section>
     </main>
 
+    <div class="toast-container p-3 top-0 end-0">
+      <div id="toastSuccess" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Divisões carregadas com sucesso!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div id="toastError" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Erro ao carregar divisões!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -140,5 +86,85 @@
       integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const formatDate = (dateString) => {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return date.toLocaleDateString("pt-BR");
+      };
+
+      const formatCurrency = (value) => {
+        return value.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+      };
+
+      const renderSplits = (splits) => {
+        const container = $("#splitsContainer");
+        const emptyState = $("#emptyState");
+
+        if (!splits || splits.length === 0) {
+          emptyState.show();
+          return;
+        }
+
+        emptyState.hide();
+        container.empty();
+
+        splits.forEach((split) => {
+          const title = split.title || "Sem título";
+          const description = split.description || "";
+          const date = formatDate(split.date);
+          const value = formatCurrency(split.value || 0);
+          const debtors = split.debtors || 0;
+          const card = $(`
+            <a href="./divisao_simples_resultado.html?id=${split.id}" class="card-link card-split">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5 class="card-title">${title}</h5>
+                      <p class="card-subtitle text-muted">${description}</p>
+                      <p class="card-text mb-0">
+                        <small class="text-muted">${value} • ${debtors} ${debtors === 1 ? "pessoa" : "pessoas"}</small>
+                      </p>
+                    </div>
+                    <div>${date}</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          `);
+          container.append(card);
+        });
+      };
+
+      const loadSimpleSplits = async () => {
+        const toastSuccess = $("#toastSuccess")[0];
+        const bootstrapToastSuccess = bootstrap.Toast.getOrCreateInstance(toastSuccess);
+        const toastError = $("#toastError")[0];
+        const bootstrapToastError = bootstrap.Toast.getOrCreateInstance(toastError);
+
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+          window.location.href = "./home.html";
+          return;
+        }
+
+        $(".d-none").removeClass("d-none");
+
+        try {
+          const response = await fetch(`http://localhost:3000/simple_splits?userId=${userId}`);
+          const data = await response.json();
+          bootstrapToastSuccess.show();
+          renderSplits(data);
+        } catch (error) {
+          bootstrapToastError.show();
+          console.error(error);
+        }
+      };
+      $(document).ready(loadSimpleSplits);
+    </script>
   </body>
 </html>
