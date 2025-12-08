@@ -259,11 +259,9 @@
         const payer = $("#payer").val();
         const participants = participantsList;
 
-        console.log(value, debtors, title, description, date, payer, participants);
-
         const method = "POST";
         const headers = { "Content-Type": "application/json" };
-        const body = JSON.stringify({ value, debtors, title, description, date, payer, participants });
+        let body = JSON.stringify({ value, debtors, title, description, date, payer, participants });
 
         if (!userId) {
           bootstrapToastSuccess.show();
@@ -272,6 +270,8 @@
           window.location.href = `./divisao_simples_resultado.html`;
           return;
         }
+
+        body = JSON.stringify({ value, debtors, title, description, date, payer, participants, userId });
 
         try {
           const response = await fetch("http://localhost:3000/simple_splits", {
