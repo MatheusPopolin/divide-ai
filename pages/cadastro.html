@@ -31,19 +31,13 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="./divisao_simples.html"
-                  >Divisão simples</a
-                >
+                <a class="nav-link" href="./divisao_simples.html">Divisão simples</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./divisao_robusta.html"
-                  >Divisão robusta</a
-                >
+                <a class="nav-link" href="./divisao_robusta.html">Divisão robusta</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./minhas_divisoes.html"
-                  >Minhas divisões</a
-                >
+                <a class="nav-link" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
           </div>
@@ -53,30 +47,39 @@
 
     <section class="divideai-section">
       <form
-        class="d-flex flex-column gap-3 py-5 px-3 divideai-section-form"
+        class="d-flex flex-column gap-3 py-5 px-3 divideai-section-form needs-validation"
         action="../index.html"
         method="GET"
+        id="formRegister"
+        novalidate
       >
         <h1 class="text-center fw-semibold fs-5">Cadastro</h1>
         <div>
           <label for="email" class="form-label">Email</label>
-          <input
-            required
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="Digite o email"
-          />
+          <input required type="email" class="form-control" id="email" placeholder="Digite o email" />
+          <div class="invalid-feedback">Email inválido.</div>
         </div>
         <div>
-          <label for="email" class="form-label">Senha</label>
+          <label for="password" class="form-label">Senha</label>
           <input
             required
             type="password"
+            minlength="8"
+            maxlength="255"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             class="form-control"
             id="password"
             placeholder="Digite a senha"
           />
+          <div class="invalid-feedback">
+            A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um
+            caractere especial.
+          </div>
+        </div>
+        <div>
+          <label for="confirmPassword" class="form-label">Confirmar senha</label>
+          <input required type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha" />
+          <div class="invalid-feedback" id="confirmPasswordFeedback">Confirme sua senha.</div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
         <p class="text-center">
@@ -86,6 +89,26 @@
       </form>
     </section>
 
+    <div class="toast-container p-3 top-0 end-0">
+      <div id="toastSuccess" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Usuário cadastrado com sucesso!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div id="toastError" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body d-flex justify-content-between">
+          Erro ao cadastrar usuário!
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -96,5 +119,77 @@
       integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const registerForm = () => {
+        const toastSuccess = $("#toastSuccess")[0];
+        const bootstrapToastSuccess = bootstrap.Toast.getOrCreateInstance(toastSuccess);
+        const toastError = $("#toastError")[0];
+        const bootstrapToastError = bootstrap.Toast.getOrCreateInstance(toastError);
+
+        const formRegister = $("#formRegister")[0];
+        const confirmPasswordInput = $("#confirmPassword")[0];
+
+        const getPasswordValues = () => {
+          const password = $("#password").val();
+          const confirmPassword = $("#confirmPassword").val();
+          return { password, confirmPassword };
+        };
+
+        const validatePasswords = () => {
+          const { password, confirmPassword } = getPasswordValues();
+
+          if (!confirmPassword) {
+            confirmPasswordInput.setCustomValidity("Confirme sua senha.");
+            $("#confirmPasswordFeedback").text("Confirme sua senha.");
+            return;
+          }
+
+          const isValid = confirmPassword === password;
+          if (!isValid) {
+            confirmPasswordInput.setCustomValidity("Senhas não coincidem.");
+            $("#confirmPasswordFeedback").text("Senhas não coincidem.");
+          } else {
+            confirmPasswordInput.setCustomValidity("");
+          }
+        };
+
+        const handleSubmit = async (event) => {
+          event.preventDefault();
+          $("#formRegister").removeClass("was-validated");
+
+          let formIsValid = formRegister.checkValidity();
+          if (!formIsValid) {
+            $("#formRegister").addClass("was-validated");
+            return;
+          }
+
+          const email = $("#email").val();
+          const { password, confirmPassword } = getPasswordValues();
+          const method = "POST";
+          const headers = { "Content-Type": "application/json" };
+          const body = JSON.stringify({ email, password });
+
+          try {
+            const response = await fetch("http://localhost:3000/users", {
+              method,
+              headers,
+              body,
+            });
+            bootstrapToastSuccess.show();
+            formRegister.reset();
+            $("#formRegister").removeClass("was-validated");
+          } catch (error) {
+            bootstrapToastError.show();
+            console.error(error);
+          }
+        };
+
+        $("#confirmPassword").on("input", validatePasswords);
+        $("#password").on("input", validatePasswords);
+        $("#formRegister").on("submit", handleSubmit);
+      };
+
+      $(document).ready(registerForm);
+    </script>
   </body>
 </html>
