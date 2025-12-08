@@ -40,6 +40,7 @@
                 <a class="nav-link active" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
+            <button class="btn btn-outline-light ms-auto" type="button" id="logoutButton">Logout</button>
           </div>
         </div>
       </nav>
@@ -164,7 +165,15 @@
           console.error(error);
         }
       };
-      $(document).ready(loadSimpleSplits);
+      const logout = () => {
+        localStorage.clear();
+        window.location.href = "../index.html";
+      };
+
+      $(document).ready(() => {
+        loadSimpleSplits();
+        $("#logoutButton").on("click", logout);
+      });
     </script>
   </body>
 </html>

@@ -40,6 +40,7 @@
                 <a class="nav-link" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
+            <button class="btn btn-outline-light ms-auto" type="button" id="authButton"></button>
           </div>
         </div>
       </nav>
@@ -218,9 +219,27 @@
       }
     };
 
+    const logout = () => {
+      localStorage.clear();
+      window.location.href = "../index.html";
+    };
+
     $(document).ready(() => {
       loadSimpleSplitResult();
       $("#shareButton").on("click", shareOnWhatsApp);
+      
+      const userId = localStorage.getItem("userId");
+      const authButton = $("#authButton");
+      
+      if (userId) {
+        authButton.text("Sair");
+        authButton.on("click", logout);
+      } else {
+        authButton.text("Login");
+        authButton.on("click", () => {
+          window.location.href = "../index.html";
+        });
+      }
     });
   </script>
 </html>
