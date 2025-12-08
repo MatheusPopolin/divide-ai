@@ -33,10 +33,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="./divisao_simples.html">Divisão simples</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="./divisao_robusta.html">Divisão robusta</a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <li class="nav-item d-none">
                 <a class="nav-link" href="./minhas_divisoes.html">Minhas divisões</a>
               </li>
             </ul>
@@ -48,32 +48,32 @@
     <main class="w-100 h-100 overflow-y-auto">
       <section class="d-flex flex-column gap-3 p-3 main-container mx-auto">
         <h1 class="fw-semibold fs-5 text-center">Divisão Simples - Resultado</h1>
-        <p class="result rounded-2 p-3 text-center">Valor por participante: R$ 25,00</p>
+        <div class="result rounded-2 p-3 text-center d-flex flex-column">
+          <p id="totalValue" class="m-0">Valor total: R$ 0,00</p>
+          <p id="numberOfPeople" class="m-0">Número de pessoas: 0</p>
+          <p id="valuePerPerson" class="m-0 fw-semibold">Valor por pessoa: R$ 0,00</p>
+        </div>
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Churrasco</h5>
-            <p class="card-subtitle text-muted">Despesas do aniversário do João</p>
-            <p class="card-text-item m-0">Data: <span>20/10/2025</span></p>
-            <p class="card-text-item m-0">Pago por: <span>Maria</span></p>
-            <p class="card-text">Participanes:</p>
-            <ul class="card-list">
-              <li>Maria</li>
-              <li>André</li>
-              <li>Caio</li>
-              <li>Paulo</li>
-              <li>Júnior</li>
-              <li>Ana</li>
-              <li>Matheus</li>
-              <li>Luiz</li>
-              <li>Silvia</li>
-              <li>Pedro</li>
+            <h5 id="splitTitle" class="card-title">Divisão sem título</h5>
+            <p id="splitDescription" class="card-subtitle text-muted mb-2">Sem descrição</p>
+            <p class="card-text-item m-0">Data: <span id="splitDate">Não informada</span></p>
+            <p class="card-text-item m-0">Pago por: <span id="splitPayer">Não informado</span></p>
+            <p class="card-text m-0">Participantes:</p>
+            <ul id="participantsList" class="card-list">
+              <li>Nenhum participante informado</li>
             </ul>
           </div>
         </div>
-        <button class="btn btn-primary">Compartilhar</button>
+        <button id="shareButton" class="btn btn-primary">Compartilhar</button>
       </section>
     </main>
 
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -85,4 +85,142 @@
       crossorigin="anonymous"
     ></script>
   </body>
+
+  <script>
+    let splitData = null;
+
+    // Funções auxiliares para formatação
+    const formatCurrency = (value) => {
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    };
+
+    const formatDate = (dateString) => {
+      if (!dateString) return null;
+      const dateObj = new Date(dateString);
+      return dateObj.toLocaleDateString("pt-BR");
+    };
+
+    const calculateValuePerPerson = (value, debtors) => {
+      return value / debtors;
+    };
+
+    const buildWhatsAppMessage = (data) => {
+      const formattedTotalValue = formatCurrency(data.value);
+      const valuePerParticipant = calculateValuePerPerson(data.value, data.debtors);
+      const formattedValuePerParticipant = formatCurrency(valuePerParticipant);
+
+      let message = `*${data.title || "Divisão de Despesas"}*`;
+
+      if (data.description && data.description !== "Sem descrição") {
+        message += `\n${data.description}`;
+      }
+
+      message += `\n\n*Valor total:* ${formattedTotalValue}\n`;
+      message += `*Número de pessoas:* ${data.debtors}\n`;
+      message += `*Valor por pessoa:* ${formattedValuePerParticipant}\n\n`;
+
+      const formattedDate = formatDate(data.date);
+      if (formattedDate) {
+        message += `*Data:* ${formattedDate}\n`;
+      }
+
+      if (data.payer && data.payer !== "Não informado") {
+        message += `*Pago por:* ${data.payer}\n`;
+      }
+
+      if (data.participants && data.participants.length > 0) {
+        message += `\n*Participantes:*\n`;
+        data.participants.forEach((participant) => {
+          message += `• ${participant}\n`;
+        });
+      }
+
+      message += "\n\nDivisão feita com o DivideAí - https://divideai.vercel.app";
+
+      return encodeURIComponent(message);
+    };
+
+    const shareOnWhatsApp = () => {
+      if (!splitData) {
+        return;
+      }
+
+      const message = buildWhatsAppMessage(splitData);
+      const whatsappUrl = `https://wa.me/?text=${message}`;
+      window.open(whatsappUrl, "_blank");
+    };
+
+    const updateUI = (data) => {
+      const formattedTotalValue = formatCurrency(data.value);
+      const valuePerParticipant = calculateValuePerPerson(data.value, data.debtors);
+      const formattedValuePerParticipant = formatCurrency(valuePerParticipant);
+      const formattedDate = formatDate(data.date);
+
+      // Atualizar valores no resultado
+      $("#totalValue").text(`Valor total: ${formattedTotalValue}`);
+      $("#numberOfPeople").text(`Número de pessoas: ${data.debtors}`);
+      $("#valuePerPerson").text(`Valor por pessoa: ${formattedValuePerParticipant}`);
+
+      // Atualizar informações da divisão
+      $("#splitTitle").text(data.title || "Divisão sem título");
+      $("#splitDescription").text(data.description || "Sem descrição");
+      $("#splitDate").text(formattedDate || "Não informada");
+      $("#splitPayer").text(data.payer || "Não informado");
+
+      // Atualizar participantes
+      $("#participantsList").empty();
+      if (data.participants && data.participants.length > 0) {
+        data.participants.forEach((participant) => {
+          $("#participantsList").append(`<li>${participant}</li>`);
+        });
+      } else {
+        $("#participantsList").append(`<li>Nenhum participante informado</li>`);
+      }
+    };
+
+    const loadSimpleSplitResult = async () => {
+      const userId = localStorage.getItem("userId");
+      const localData = JSON.parse(localStorage.getItem("simpleSplit"));
+
+      if (userId) {
+        $(".d-none").removeClass("d-none");
+      }
+
+      if (!userId && !localData) {
+        window.location.href = "./divisao_simples.html";
+        return;
+      }
+
+      if (!userId && localData) {
+        splitData = localData;
+        updateUI(splitData);
+        return;
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      if (!id) {
+        window.location.href = "./divisao_simples.html";
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:3000/simple_splits/${id}`);
+        const data = await response.json();
+        splitData = data;
+        updateUI(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    $(document).ready(() => {
+      loadSimpleSplitResult();
+      $("#shareButton").on("click", shareOnWhatsApp);
+    });
+  </script>
 </html>
